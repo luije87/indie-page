@@ -11,15 +11,19 @@ export const metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <div className="navbar bg-base-100 mx-auto flex items-center justify-between px-2 sm:px-4 lg:max-w-7xl">
-        <div className="flex-1">
-          <Link className="btn btn-ghost text-xl" href={"/"}>
-            {APPLICATION_NAME}
-          </Link>
-        </div>
-        <div className="flex-none">
-          <form>
+    <div className="max-w-xl mx-4 mt-8 lg:mx-auto">
+      <nav className="">
+        <div className="flex flex-row items-center">
+          <div className="flex flex-1 gap-4">
+            <Link className="hover:link" href="/dashboard">
+              Page
+            </Link>
+            <Link className="hover:link" href="/dashboard/settings">
+              Settings
+            </Link>
+          </div>
+          <button className="btn btn-warning mr-3">Deploy</button>
+          {/* <form>
             <SubmitButton
               pendingText="Logging out..."
               formAction={signOutAction}
@@ -27,10 +31,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             >
               Log out
             </SubmitButton>
-          </form>
+          </form> */}
         </div>
-      </div>
-      <main>{children}</main>
-    </>
+      </nav>
+      <main className="mt-10">{children}</main>
+    </div>
   );
 }
