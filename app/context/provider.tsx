@@ -4,7 +4,7 @@ import { createContext, SetStateAction, useEffect, useState } from "react";
 
 export const UserContext = createContext({
   user: {
-    name: "World1",
+    name: "World",
     location: "Earth",
     bio: "I am a software engineer",
     links: ["github;https://github.com", "", ""],
@@ -25,21 +25,32 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     async function fetchUser() {
       const supabase = createClient();
-      const { data } = await supabase
+      const id = (await supabase.auth.getSession()).data.session?.user.id;
+      const { data, error } = await supabase
         .from("users")
         .select("full_name")
-        .eq("id", "f0490d7e-5282-4b07-8816-04d021ebe80b")
+        .eq("id", id)
         .single();
-      const user = JSON.parse(data?.full_name);
-      setUser(user);
+
+      if (data && data.full_name !== null) {
+        const user = JSON.parse(data?.full_name);
+        setUser(user);
+      } else {
+        const temp = {
+          name: "World",
+          location: "Earth",
+          bio: "I am a software engineer",
+          links: ["github;https://github.com", "", ""],
+          slug: "world",
+        };
+        setUser(temp as any);
+      }
     }
 
     fetchUser();
   }, []);
 
   const [user, setUser] = useState(null);
-
-  console.log(user);
 
   return (
     user && (
