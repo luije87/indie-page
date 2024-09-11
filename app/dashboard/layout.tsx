@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               Settings
             </Link>
           </div>
-          <button className="btn btn-warning mr-3">Deploy</button>
+          <button className="btn btn-warning mr-3">deploy</button>
           {/* <form>
             <SubmitButton
               pendingText="Logging out..."
@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </form> */}
         </div>
       </nav>
-      <main className="mt-10">{children}</main>
+      <main className="my-10">{children}</main>
     </div>
   );
 }

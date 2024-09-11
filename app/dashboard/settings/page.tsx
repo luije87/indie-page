@@ -1,5 +1,7 @@
+"use client";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { signOutAction } from "@/utils/auth-helpers/actions";
+import { useState } from "react";
 
 export default function Home() {
   return (
