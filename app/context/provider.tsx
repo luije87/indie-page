@@ -26,15 +26,16 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     async function fetchUser() {
       const supabase = createClient();
       const id = (await supabase.auth.getSession()).data.session?.user.id;
+
       const { data, error } = await supabase
         .from("users")
-        .select("full_name")
+        .select("full_name, slug")
         .eq("id", id)
         .single();
 
       if (data && data.full_name !== null) {
         const user = JSON.parse(data?.full_name);
-        setUser(user);
+        setUser({ ...user, slug: data.slug });
       } else {
         const temp = {
           name: "World",

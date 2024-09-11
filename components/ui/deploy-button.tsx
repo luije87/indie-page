@@ -49,7 +49,7 @@ export default function DeployButton() {
               <button className="btn btn-warning mr-3">continue editing</button>
               {/* if there is a button in form, it will close the modal */}
             </form>
-            <a href="/luije" target="blank" className="btn">
+            <a href={`/${user.slug}`} target="blank" className="btn">
               view my page
               <ArrowUpRightIcon className="w-6 h-6" />
             </a>
