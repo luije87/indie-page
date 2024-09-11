@@ -34,6 +34,13 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         .single();
 
       if (data && data.payload !== null) {
+        if (data.slug === null) {
+          // generate random 5 digit number and letters
+          const random = Math.random().toString(36).substring(2, 7);
+          data.slug = random;
+          // update slug from setting table
+          await supabase.from("settings").update({ slug: random }).eq("id", id);
+        }
         const user = JSON.parse(data?.payload);
         setUser({ ...user, slug: data.slug });
       } else {
