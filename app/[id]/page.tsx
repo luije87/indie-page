@@ -1,27 +1,31 @@
 import { createClient } from "@/utils/supabase/server";
-import {
-  MapIcon,
-  MapPinIcon,
-  NewspaperIcon,
-  PercentBadgeIcon,
-} from "@heroicons/react/16/solid";
+import { MapPinIcon, NewspaperIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
+import { redirect, RedirectType } from "next/navigation";
 
-export default async function Home() {
+export default async function Home({ params }: { params: { id: string } }) {
   const supabase = createClient();
+  let user = null;
 
   const { data, error } = await supabase
     .from("users")
     .select("*")
-    .eq("id", "f0490d7e-5282-4b07-8816-04d021ebe80b")
+    .eq("slug", params.id)
     .single();
 
-  const user = JSON.parse(data?.full_name);
+  if (data && data.full_name) {
+    user = JSON.parse(data?.full_name);
+  }
 
   return (
     <div>
-      <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0 h-screen justify-center">
-        {/* <aside className="-ml-[8px] mb-16 tracking-tight">
+      {!user ? (
+        <>Not found</>
+      ) : (
+        <>
+          {" "}
+          <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0 h-screen justify-center">
+            {/* <aside className="-ml-[8px] mb-16 tracking-tight">
           <div className="lg:sticky lg:top-20">
             <nav
               className="flex flex-row items-start relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
@@ -50,18 +54,18 @@ export default async function Home() {
             </nav>
           </div>
         </aside> */}
-        <section>
-          <h1 className="mb-3 text-2xl font-semibold tracking-tighter">
-            {user.name}
-          </h1>
-          <div className="flex mb-8 items-center align-middle">
-            <MapPinIcon width={16} />
-            <p className="ml-2"> {user.location}</p>
-          </div>
+            <section>
+              <h1 className="mb-3 text-2xl font-semibold tracking-tighter">
+                {user.name}
+              </h1>
+              <div className="flex mb-8 items-center align-middle">
+                <MapPinIcon width={16} />
+                <p className="ml-2"> {user.location}</p>
+              </div>
 
-          <p className="mb-4">{user.bio}</p>
+              <p className="mb-4">{user.bio}</p>
 
-          {/* <div className="my-8">
+              {/* <div className="my-8">
             <h1 className="mb-3 text-xl font-semibold tracking-tighter">
               startups
             </h1>
@@ -104,43 +108,43 @@ export default async function Home() {
               </a>
             </div>
           </div> */}
-        </section>
-        <footer className="mb-16">
-          <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
-            {user.links.length > 0 &&
-              user.links
-                .filter((item: string) => item.length > 0)
-                .map((item: any, index: number) => (
-                  <li key={index}>
-                    <a
-                      className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      href={item.split(";")[1]}
-                    >
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 12 12"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z"
-                          fill="currentColor"
-                        ></path>
-                      </svg>
-                      <p className="ml-2 h-7">
-                        {
-                          // the item is a string separated by a semi-colon, the first part is the name and the second part is the link
-                          item.split(";")[0]
-                        }
-                      </p>
-                    </a>
-                  </li>
-                ))}
+            </section>
+            <footer className="mb-16">
+              <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
+                {user.links.length > 0 &&
+                  user.links
+                    .filter((item: string) => item.length > 0)
+                    .map((item: any, index: number) => (
+                      <li key={index}>
+                        <a
+                          className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          href={item.split(";")[1]}
+                        >
+                          <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 12 12"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z"
+                              fill="currentColor"
+                            ></path>
+                          </svg>
+                          <p className="ml-2 h-7">
+                            {
+                              // the item is a string separated by a semi-colon, the first part is the name and the second part is the link
+                              item.split(";")[0]
+                            }
+                          </p>
+                        </a>
+                      </li>
+                    ))}
 
-            {/* <li>
+                {/* <li>
               <a
                 className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
                 rel="noopener noreferrer"
@@ -206,17 +210,19 @@ export default async function Home() {
                 <p className="ml-2 h-7">view source</p>
               </a>
             </li> */}
-          </ul>
-        </footer>
+              </ul>
+            </footer>
 
-        <Link
-          href={"/"}
-          className="mt-8 text-neutral-600 dark:text-neutral-300 flex"
-        >
-          <NewspaperIcon width={16} className="mr-3" />
-          claim your page
-        </Link>
-      </main>
+            <Link
+              href={"/"}
+              className="mt-8 text-neutral-600 dark:text-neutral-300 flex"
+            >
+              <NewspaperIcon width={16} className="mr-3" />
+              claim your page
+            </Link>
+          </main>
+        </>
+      )}
     </div>
   );
 }
