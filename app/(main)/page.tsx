@@ -3,55 +3,71 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-20 lg:items-start px-8 py-8 lg:py-20">
-      <div className="hero-content text-center">
-        <div className="max-w-5xl">
-          <h1 className="text-5xl font-bold mb-5">⚡️</h1>
-          <h1 className="text-5xl font-bold">Launch Your Startup today</h1>
-          <h1 className="text-3xl font-bold">
-            Faster, Smarter, Easier and Free
-          </h1>
-          <p className="py-6">
-            In the fast-paced world of shipping startups, speed is everything.
-            Ship it Quick empowers you to launch your startup with lightning
-            speed using cutting-edge technology. Our platform combines the power
-            of Supabase, Resend, Next.js, Tailwind CSS and Stripe, so you can
-            focus on innovation while we handle the heavy lifting.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-5 gap-5 justify-items-center items-center">
-            <Image
-              src={"/supabase-logo-wordmark--light.png"}
-              width={100}
-              alt={""}
-              height={100}
-            />
-            <Image
-              src={"/resend-wordmark-black.png"}
-              width={100}
-              alt={""}
-              height={100}
-            />
-            <Image
-              src={"/vercel-logotype-dark.png"}
-              width={100}
-              alt={""}
-              height={100}
-            />
-            <Image
-              src={"/tailwindcss-logotype.svg"}
-              width={100}
-              alt={""}
-              height={100}
-            />
-            <Image
-              src={"/Stripe_id7qRMcZ8P_2.png"}
-              width={100}
-              alt={""}
-              height={100}
-            />
-          </div>
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+        <h1 className="text-2xl font-semibold">welcome to indie page</h1>
+        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
+          <li className="mb-2">get started by claiming your page.</li>
+          <li className="mb-2">save and see your changes instantly.</li>
+          <li>ai powered.</li>
+        </ol>
+
+        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <Link
+            href="/sign-in"
+            className="btn dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
+            rel="noopener noreferrer"
+          >
+            login
+          </Link>
         </div>
-      </div>
+      </main>
+      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="https://nextjs.org/icons/file.svg"
+            alt="File icon"
+            width={16}
+            height={16}
+          />
+          learn
+        </a>
+        <Link
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="/luije"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="https://nextjs.org/icons/window.svg"
+            alt="Window icon"
+            width={16}
+            height={16}
+          />
+          example
+        </Link>
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="https://nextjs.org/icons/globe.svg"
+            alt="Globe icon"
+            width={16}
+            height={16}
+          />
+          go to nextjs.org →
+        </a>
+      </footer>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import {
   Space_Grotesk,
 } from "next/font/google";
 const font = Space_Grotesk({ subsets: ["latin"] });
+import "@/app/globals.css";
 
 export default function RootLayout({
   children,
