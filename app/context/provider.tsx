@@ -33,23 +33,22 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         .eq("id", id)
         .single();
 
+      if (data && data?.slug === null) {
+        const random = Math.random().toString(36).substring(2, 7);
+        data.slug = random;
+        await supabase.from("settings").update({ slug: random }).eq("id", id);
+      }
+
       if (data && data.payload !== null) {
-        if (data.slug === null) {
-          // generate random 5 digit number and letters
-          const random = Math.random().toString(36).substring(2, 7);
-          data.slug = random;
-          // update slug from setting table
-          await supabase.from("settings").update({ slug: random }).eq("id", id);
-        }
         const user = JSON.parse(data?.payload);
         setUser({ ...user, slug: data.slug });
       } else {
         const temp = {
-          name: "World",
-          location: "Earth",
+          name: "Universe",
+          location: "Bali",
           bio: "I am a software engineer",
           links: ["github;https://github.com", "", ""],
-          slug: "world",
+          slug: data?.slug,
         };
         setUser(temp as any);
       }
