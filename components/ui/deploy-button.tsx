@@ -1,17 +1,31 @@
 "use client";
 import { ArrowUpIcon, ArrowUpRightIcon } from "@heroicons/react/16/solid";
 import { SubmitButton } from "./submit-button";
+import { createClient } from "@/utils/supabase/client";
+import { useContext } from "react";
+import { UserContext } from "@/app/context/provider";
 
 export default function DeployButton() {
+  const { user } = useContext(UserContext);
+
   const deployAction = async () => {
-    // sleep for 2 seconds
-    await new Promise((resolve) => {
-      setTimeout(resolve, 2000);
-    });
+    const supabase = createClient();
+    const { data } = await supabase.auth.getSession();
+    const id = data?.session?.user.id;
+
+    const { error } = await supabase
+      .from("users")
+      .update({ full_name: JSON.stringify(user) })
+      .eq("id", id);
+
+    if (error) {
+      alert("error deploying");
+    }
 
     //@ts-ignore
     document.getElementById("my_modal_2").showModal();
   };
+
   return (
     <>
       <form action="">
@@ -25,19 +39,20 @@ export default function DeployButton() {
       </form>
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
+          <h3 className="font-bold text-lg">Let's go!</h3>
           <p className="py-4">
-            Press ESC key or click the button below to close
+            Your indie page has been deployed successfully! You can now share
+            it! 🚀
           </p>
           <div className="modal-action">
-            <button className="btn btn-warning">continue editing</button>
             <form method="dialog">
+              <button className="btn btn-warning mr-3">continue editing</button>
               {/* if there is a button in form, it will close the modal */}
-              <button className="btn">
-                view my page
-                <ArrowUpRightIcon className="w-6 h-6" />
-              </button>
             </form>
+            <a href="/luije" target="blank" className="btn">
+              view my page
+              <ArrowUpRightIcon className="w-6 h-6" />
+            </a>
           </div>
         </div>
       </dialog>

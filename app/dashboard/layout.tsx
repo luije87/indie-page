@@ -10,23 +10,24 @@ export const metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="max-w-xl mx-4 mt-8 lg:mx-auto">
-      <nav className="">
-        <div className="flex flex-row items-center">
-          <div className="flex flex-1 gap-4">
-            <Link className="hover:link" href="/dashboard">
-              Page
-            </Link>
-            <Link className="hover:link" href="/dashboard/settings">
-              Settings
-            </Link>
+    <UserProvider>
+      <div className="max-w-xl mx-4 mt-8 lg:mx-auto">
+        <nav className="">
+          <div className="flex flex-row items-center">
+            <div className="flex flex-1 gap-4">
+              <Link className="hover:link" href="/dashboard">
+                Page
+              </Link>
+              <Link className="hover:link" href="/dashboard/settings">
+                Settings
+              </Link>
+            </div>
+            <DeployButton />
           </div>
-          <DeployButton />
-        </div>
-      </nav>
-      <UserProvider>
+        </nav>
+
         <main className="my-10">{children}</main>
-      </UserProvider>
-    </div>
+      </div>
+    </UserProvider>
   );
 }

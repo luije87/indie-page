@@ -1,7 +1,15 @@
+import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = createClient();
+  const session = await supabase.auth.getSession();
+  console.log(session);
+  const isAuthenticated = session?.data?.session?.user.id !== undefined;
+  console.log(session?.data?.session?.user.id);
+
+  console.log(isAuthenticated);
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -20,13 +28,23 @@ export default function Home() {
           >
             login
           </Link> */}
-          <Link
-            href="/sign-in"
-            className="btn btn-neutral flex items-center justify-center text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            rel="noopener noreferrer"
-          >
-            claim your page
-          </Link>
+          {isAuthenticated ? (
+            <Link
+              href="/dashboard"
+              className="btn btn-neutral flex items-center justify-center text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
+              rel="noopener noreferrer"
+            >
+              dashboard
+            </Link>
+          ) : (
+            <Link
+              href="/sign-in"
+              className="btn btn-neutral flex items-center justify-center text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
+              rel="noopener noreferrer"
+            >
+              claim your page
+            </Link>
+          )}
         </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
