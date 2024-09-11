@@ -111,7 +111,7 @@ export default async function Home() {
               user.links
                 .filter((item: string) => item.length > 0)
                 .map((item: any, index: number) => (
-                  <li>
+                  <li key={index}>
                     <a
                       className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
                       rel="noopener noreferrer"

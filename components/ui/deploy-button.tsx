@@ -39,7 +39,7 @@ export default function DeployButton() {
       </form>
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Let's go!</h3>
+          <h3 className="font-bold text-lg">Lets go!</h3>
           <p className="py-4">
             Your indie page has been deployed successfully! You can now share
             it! 🚀
