@@ -1,28 +1,13 @@
 "use client";
-import { SubmitButton } from "@/components/ui/submit-button";
-import { signOutAction } from "@/utils/auth-helpers/actions";
-import { SparklesIcon } from "@heroicons/react/20/solid";
-import Link from "next/link";
-import { useState } from "react";
-
-type User = {
-  name: string;
-  location: string;
-  bio: string;
-  links: string[];
-  slug: string;
-};
+import RewriteButton from "@/components/ui/rewrite-button";
+import { useContext } from "react";
+import { UserContext } from "../context/provider";
 
 export default function Page() {
-  const [user, setUser] = useState<User>({
-    name: "",
-    location: "",
-    bio: "",
-    links: ["", "", ""],
-    slug: "",
-  });
+  const { user, setUser } = useContext(UserContext);
   return (
     <div className="max-w-xl mx-4 lg:mx-auto">
+      {user.name}
       <div className="flex flex-col gap-4">
         {/* <p className="mt-4 text-gray-600">Welcome to the admin page!</p> */}
         <label className="form-control w-full">
@@ -37,6 +22,7 @@ export default function Page() {
             type="text"
             placeholder="type here"
             className="input input-bordered w-full"
+            autoFocus
           />
         </label>
         <label className="form-control w-full">
@@ -45,9 +31,9 @@ export default function Page() {
           </div>
           <input
             value={user.location}
+            onChange={(e) => setUser({ ...user, location: e.target.value })}
             name="location"
             maxLength={50}
-            onChange={(e) => setUser({ ...user, location: e.target.value })}
             type="text"
             placeholder="bali, indonesia"
             className="input input-bordered w-full"
@@ -67,22 +53,18 @@ export default function Page() {
           ></textarea>
         </label>
 
-        <button className="btn btn-neutral">
-          rewrite
-          <SparklesIcon className="w-6 h-6 ml-2" />
-        </button>
+        <RewriteButton />
         <div className="divider">links</div>
         <label className="form-control w-full">
           <input
             value={user.links[0]}
+            onChange={(e) => {
+              const links = [...user.links];
+              links[0] = e.target.value;
+              setUser({ ...user, links });
+            }}
             name="link0"
             maxLength={50}
-            onChange={(e) =>
-              setUser({
-                ...user,
-                links: [e.target.value, user.links[1], user.links[2]],
-              })
-            }
             type="text"
             placeholder="startup;https://ship-it-quick.vercel.app/"
             className="input input-bordered w-full"
@@ -91,14 +73,13 @@ export default function Page() {
         <label className="form-control w-full">
           <input
             value={user.links[1]}
+            onChange={(e) => {
+              const links = [...user.links];
+              links[1] = e.target.value;
+              setUser({ ...user, links });
+            }}
             name="link1"
             maxLength={50}
-            onChange={(e) =>
-              setUser({
-                ...user,
-                links: [user.links[0], e.target.value, user.links[2]],
-              })
-            }
             type="text"
             placeholder="github;https://github.com/luije87"
             className="input input-bordered w-full"
@@ -107,14 +88,13 @@ export default function Page() {
         <label className="form-control w-full">
           <input
             value={user.links[2]}
+            onChange={(e) => {
+              const links = [...user.links];
+              links[2] = e.target.value;
+              setUser({ ...user, links });
+            }}
             name="link2"
             maxLength={50}
-            onChange={(e) =>
-              setUser({
-                ...user,
-                links: [user.links[0], user.links[1], e.target.value],
-              })
-            }
             type="text"
             placeholder="twitter;https://x.com/luije87"
             className="input input-bordered w-full"

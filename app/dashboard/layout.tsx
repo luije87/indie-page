@@ -1,8 +1,7 @@
 import "@/app/globals.css";
-import { signOutAction } from "@/utils/auth-helpers/actions";
-import { APPLICATION_NAME } from "@/config";
-import { SubmitButton } from "@/components/ui/submit-button";
 import Link from "next/link";
+import DeployButton from "@/components/ui/deploy-button";
+import { UserProvider } from "../context/provider";
 
 export const metadata = {
   title: "Ship it quick ⚡️",
@@ -22,19 +21,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               Settings
             </Link>
           </div>
-          <button className="btn btn-warning mr-3">deploy</button>
-          {/* <form>
-            <SubmitButton
-              pendingText="Logging out..."
-              formAction={signOutAction}
-              className="btn"
-            >
-              Log out
-            </SubmitButton>
-          </form> */}
+          <DeployButton />
         </div>
       </nav>
-      <main className="my-10">{children}</main>
+      <UserProvider>
+        <main className="my-10">{children}</main>
+      </UserProvider>
     </div>
   );
 }

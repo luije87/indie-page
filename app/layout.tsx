@@ -1,9 +1,4 @@
-import {
-  Inter,
-  Bricolage_Grotesque,
-  Darker_Grotesque,
-  Space_Grotesk,
-} from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 const font = Space_Grotesk({ subsets: ["latin"] });
 import "@/app/globals.css";
 
