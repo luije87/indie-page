@@ -1,4 +1,9 @@
-import { NewspaperIcon, PercentBadgeIcon } from "@heroicons/react/16/solid";
+import {
+  MapIcon,
+  MapPinIcon,
+  NewspaperIcon,
+  PercentBadgeIcon,
+} from "@heroicons/react/16/solid";
 import Link from "next/link";
 
 export default function Home() {
@@ -35,9 +40,13 @@ export default function Home() {
           </div>
         </aside>
         <section>
-          <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
+          <h1 className="mb-3 text-2xl font-semibold tracking-tighter">
             Luije
           </h1>
+          <div className="flex mb-8 items-center align-middle">
+            <MapPinIcon width={16} />
+            <p className="ml-2">United States</p>
+          </div>
 
           <p className="mb-4">
             Hi, I am Luije! I am a software engineer and I love building things
@@ -46,7 +55,7 @@ export default function Home() {
 
           <div className="my-8">
             <h1 className="mb-3 text-xl font-semibold tracking-tighter">
-              startups:
+              startups
             </h1>
             <div>
               <a className="flex flex-col space-y-1 mb-4" href="/blog/vim">
