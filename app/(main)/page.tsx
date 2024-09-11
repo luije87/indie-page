@@ -20,6 +20,13 @@ export default function Home() {
           >
             login
           </Link>
+          <Link
+            href="/sign-in"
+            className="btn btn-neutral flex items-center justify-center text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
+            rel="noopener noreferrer"
+          >
+            claim your page
+          </Link>
         </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">

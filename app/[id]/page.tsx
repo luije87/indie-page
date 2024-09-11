@@ -40,7 +40,7 @@ export default function Home() {
           </h1>
 
           <p className="mb-4">
-            Hi, I'm Luije! I'm a software engineer and I love building things
+            Hi, I am Luije! I am a software engineer and I love building things
             for the web.
           </p>
 
