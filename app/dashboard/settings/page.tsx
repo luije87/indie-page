@@ -13,7 +13,7 @@ export default function Home() {
   async function save() {
     // check if same slug exists
     const { data } = await supabase
-      .from("users")
+      .from("settings")
       .select("slug")
       .eq("slug", slug)
       .single();
@@ -25,13 +25,13 @@ export default function Home() {
 
     const id = (await supabase.auth.getSession()).data.session?.user.id;
 
-    await supabase.from("users").update({ slug: slug }).eq("id", id);
+    await supabase.from("settings").update({ slug: slug }).eq("id", id);
 
     setUser({ ...user, slug: slug });
   }
   return (
     <>
-      <form action="">
+      <form>
         <label className="form-control w-full gap-3">
           <div className="label">
             <span className="label-text">slug</span>

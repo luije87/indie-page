@@ -14,12 +14,14 @@ export default function DeployButton() {
     const id = data?.session?.user.id;
 
     const { error } = await supabase
-      .from("users")
-      .update({ full_name: JSON.stringify(user) })
+      .from("settings")
+      .update({ payload: JSON.stringify(user) })
       .eq("id", id);
 
     if (error) {
       alert("error deploying");
+      console.log(error);
+      return;
     }
 
     //@ts-ignore

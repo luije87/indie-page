@@ -1,20 +1,19 @@
 import { createClient } from "@/utils/supabase/server";
 import { MapPinIcon, NewspaperIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
-import { redirect, RedirectType } from "next/navigation";
 
 export default async function Home({ params }: { params: { id: string } }) {
   const supabase = createClient();
   let user = null;
 
   const { data, error } = await supabase
-    .from("users")
+    .from("settings")
     .select("*")
     .eq("slug", params.id)
     .single();
 
-  if (data && data.full_name) {
-    user = JSON.parse(data?.full_name);
+  if (data && data.payload) {
+    user = JSON.parse(data?.payload);
   }
 
   return (
@@ -23,7 +22,6 @@ export default async function Home({ params }: { params: { id: string } }) {
         <>Not found</>
       ) : (
         <>
-          {" "}
           <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0 h-screen justify-center">
             {/* <aside className="-ml-[8px] mb-16 tracking-tight">
           <div className="lg:sticky lg:top-20">

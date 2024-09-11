@@ -134,6 +134,29 @@ export type Database = {
         }
         Relationships: []
       }
+      settings: {
+        Row: {
+          id: string
+          payload: string | null
+        }
+        Insert: {
+          id: string
+          payload?: string | null
+        }
+        Update: {
+          id?: string
+          payload?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settings_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       subscriptions: {
         Row: {
           cancel_at: string | null

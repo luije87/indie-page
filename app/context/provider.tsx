@@ -28,13 +28,13 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       const id = (await supabase.auth.getSession()).data.session?.user.id;
 
       const { data, error } = await supabase
-        .from("users")
-        .select("full_name, slug")
+        .from("settings")
+        .select("payload, slug")
         .eq("id", id)
         .single();
 
-      if (data && data.full_name !== null) {
-        const user = JSON.parse(data?.full_name);
+      if (data && data.payload !== null) {
+        const user = JSON.parse(data?.payload);
         setUser({ ...user, slug: data.slug });
       } else {
         const temp = {

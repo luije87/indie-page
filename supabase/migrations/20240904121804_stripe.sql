@@ -14,7 +14,7 @@ create table users (
 );
 alter table users
   enable row level security;
-create policy "Can view own user data." on users
+  create policy "Can view own user data." on users
   for select using ((select auth.uid()) = id);
 create policy "Can update own user data." on users
   for update using ((select auth.uid()) = id);
@@ -27,6 +27,7 @@ returns trigger
 set search_path = ''
 as $$
   begin
+    insert into public.settings (id) values (new.id);
     insert into public.users (id, full_name, avatar_url)
     values (new.id, new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'avatar_url');
     return new;
@@ -38,6 +39,26 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row
     execute procedure public.handle_new_user();
+
+/**
+* SETTINGS
+* Note: this is a private table that contains a mapping of user IDs to Stripe customer IDs.
+*/
+
+create table settings (
+  -- UUID from auth.users
+  id uuid references auth.users not null primary key,
+  -- The user's customer ID in Stripe. User must not be able to update this.
+  payload text,
+  slug text
+);
+
+alter table settings
+  enable row level security;
+create policy "Can update own user data." on settings
+  for update using ((select auth.uid()) = id);
+create policy "Allow public read-only access." on settings
+  for select using (true);
 
 /**
 * CUSTOMERS
