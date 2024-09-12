@@ -16,10 +16,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex flex-row items-center">
             <div className="flex flex-1 gap-4">
               <Link className="hover:link" href="/dashboard">
-                Page
+                page
               </Link>
               <Link className="hover:link" href="/dashboard/settings">
-                Settings
+                settings
               </Link>
             </div>
             <DeployButton />

@@ -63,7 +63,7 @@ export default function Page() {
               setUser({ ...user, links });
             }}
             name="link0"
-            maxLength={50}
+            maxLength={100}
             type="text"
             placeholder="github;https://github.com/luije87"
             className="input input-bordered w-full"
@@ -78,7 +78,7 @@ export default function Page() {
               setUser({ ...user, links });
             }}
             name="link1"
-            maxLength={50}
+            maxLength={100}
             type="text"
             placeholder="startup;https://ship-it-quick.vercel.app/"
             className="input input-bordered w-full"
@@ -93,7 +93,7 @@ export default function Page() {
               setUser({ ...user, links });
             }}
             name="link2"
-            maxLength={50}
+            maxLength={100}
             type="text"
             placeholder="twitter;https://x.com/luije87"
             className="input input-bordered w-full"
