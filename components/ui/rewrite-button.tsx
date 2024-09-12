@@ -6,12 +6,12 @@ import { UserContext } from "@/app/context/provider";
 
 export default function RewriteButton() {
   const { user, setUser } = useContext(UserContext);
-  const [bio, setBio] = useState(user.bio);
+  const [bio, setBio] = useState("");
 
   const rewriteAction = async () => {
     const request = new Request("/api/rewrite", {
       method: "POST",
-      body: JSON.stringify({ bio: bio }),
+      body: JSON.stringify({ bio: user.bio }),
     });
 
     const response = await fetch(request);
