@@ -1,16 +1,34 @@
 "use client";
 import { SparklesIcon } from "@heroicons/react/16/solid";
 import { SubmitButton } from "./submit-button";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "@/app/context/provider";
 
 export default function RewriteButton() {
   const { user, setUser } = useContext(UserContext);
+  const [bio, setBio] = useState(user.bio);
+
   const rewriteAction = async () => {
-    // sleep for 2 seconds
-    await new Promise((resolve) => {
-      setTimeout(resolve, 2000);
+    const request = new Request("/api/rewrite", {
+      method: "POST",
+      body: JSON.stringify({ bio: bio }),
     });
+
+    const response = await fetch(request);
+
+    if (!response.ok) {
+      alert("error rewriting");
+      return;
+    }
+
+    const json = await response.json();
+
+    setBio(json.content);
+
+    // sleep for 2 seconds
+    // await new Promise((resolve) => {
+    //   setTimeout(resolve, 2000);
+    // });
     //@ts-ignore
     document.getElementById("my_modal_1").showModal();
   };
@@ -33,14 +51,11 @@ export default function RewriteButton() {
             powered by AI
             <SparklesIcon className="w-3 h-3 ml-2" />
           </h3>
-          <p className="py-4">
-            Hi, I am Luije! I am a software engineer and I love building things
-            for the web.
-          </p>
+          <p className="py-4">{bio}</p>
           <div className="modal-action">
             <button
               onClick={() => {
-                setUser({ ...user, name: "Luije" });
+                setUser({ ...user, bio: bio });
                 //@ts-ignore
                 document.getElementById("my_modal_1").close();
               }}

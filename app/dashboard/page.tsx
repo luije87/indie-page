@@ -5,6 +5,7 @@ import { UserContext } from "../context/provider";
 
 export default function Page() {
   const { user, setUser } = useContext(UserContext);
+
   return (
     <div className="max-w-xl mx-4 lg:mx-auto">
       <div className="flex flex-col gap-4">
