@@ -22,7 +22,7 @@ export default function Page() {
             >
               <div
                 className={cn(
-                  "w-8 sm:w-16 rounded-full border text-center content-center hover:border-4",
+                  "w-12 sm:w-16 rounded-full border text-center content-center hover:border-4",
                   user?.avatar === avatar ? "border-4 border-red-300" : ""
                 )}
               >
