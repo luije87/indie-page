@@ -41,7 +41,7 @@ export default function Page() {
         </label>
         <label className="form-control w-full">
           <div className="label">
-            <span className="label-text">write cool stuffs about you</span>
+            <span className="label-text">write cool stuff about you</span>
           </div>
           <textarea
             maxLength={200}

@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import Link from "next/link";
 import DeployButton from "@/components/ui/deploy-button";
 import { UserProvider } from "../context/provider";
+import ViewLink from "@/components/ui/view-link";
 
 export const metadata = {
   title: "Ship it quick ⚡️",
@@ -21,6 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Link className="hover:link" href="/dashboard/settings">
                 settings
               </Link>
+              <ViewLink />
             </div>
             <DeployButton />
           </div>

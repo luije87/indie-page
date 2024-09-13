@@ -58,11 +58,11 @@ export default function Home() {
         <form>
           <SubmitButton
             // disabled={slug === ""}
-            pendingText="Logging out..."
+            pendingText="logging out..."
             formAction={signOutAction}
             className="btn btn-ghost"
           >
-            Log out
+            log out
           </SubmitButton>
         </form>
       </div>

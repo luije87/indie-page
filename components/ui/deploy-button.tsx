@@ -33,17 +33,17 @@ export default function DeployButton() {
       <form action="">
         <SubmitButton
           formAction={deployAction}
-          pendingText="deploying ..."
+          pendingText="pulishing ..."
           className="btn btn-warning mr-3"
         >
-          deploy
+          publish
         </SubmitButton>
       </form>
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Lets go!</h3>
           <p className="py-4">
-            Your indie page has been deployed successfully! You can now share
+            Your indie page has been published successfully! You can now share
             it! 🚀
           </p>
           <div className="modal-action">
