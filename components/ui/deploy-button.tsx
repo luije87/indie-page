@@ -34,7 +34,7 @@ export default function DeployButton() {
         <SubmitButton
           formAction={deployAction}
           pendingText="pulishing ..."
-          className="btn btn-warning mr-3"
+          className="btn btn-warning"
         >
           publish
         </SubmitButton>
