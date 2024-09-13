@@ -48,7 +48,7 @@ export default function RewriteButton() {
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg flex flex-row items-center">
-            powered by AI
+            Your new bio powered by AI
             <SparklesIcon className="w-3 h-3 ml-2" />
           </h3>
           <p className="py-4">{bio}</p>
