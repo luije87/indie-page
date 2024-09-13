@@ -7,7 +7,7 @@ export default function Page() {
   const { user, setUser } = useContext(UserContext);
 
   return (
-    <div className="max-w-xl mx-4 lg:mx-auto">
+    <div className="max-w-xl mx-0 sm:mx-0 lg:mx-auto">
       <div className="flex flex-col gap-4">
         {/* <p className="mt-4 text-gray-600">Welcome to the admin page!</p> */}
         <label className="form-control w-full">
