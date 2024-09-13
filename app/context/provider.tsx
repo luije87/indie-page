@@ -51,6 +51,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           bio: "I am a software engineer",
           links: ["github;https://github.com", "", ""],
           slug: data?.slug,
+          avatar: "",
         };
         setUser(temp as any);
       }
