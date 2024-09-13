@@ -53,6 +53,9 @@ export default async function Home({ params }: { params: { id: string } }) {
           </div>
         </aside> */}
             <section>
+              <h1 className="mb-3 text-6xl font-semibold tracking-tighter">
+                <span className="mr-3">{user.avatar}</span>
+              </h1>
               <h1 className="mb-3 text-2xl font-semibold tracking-tighter">
                 {user.name}
               </h1>

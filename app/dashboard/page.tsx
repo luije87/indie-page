@@ -2,6 +2,9 @@
 import RewriteButton from "@/components/ui/rewrite-button";
 import { useContext } from "react";
 import { UserContext } from "../context/provider";
+import { cn } from "@/utils/cn";
+
+const avatars = ["", "👾", "🤖", "👽", "🚀", "🛸"];
 
 export default function Page() {
   const { user, setUser } = useContext(UserContext);
@@ -10,6 +13,24 @@ export default function Page() {
     <div className="max-w-xl mx-0 sm:mx-0 lg:mx-auto">
       <div className="flex flex-col gap-4">
         {/* <p className="mt-4 text-gray-600">Welcome to the admin page!</p> */}
+        <div className="flex gap-3 justify-between">
+          {avatars.map((avatar, index) => (
+            <div
+              key={index}
+              className="avatar hover:cursor-pointer"
+              onClick={() => setUser({ ...user, avatar: avatar })}
+            >
+              <div
+                className={cn(
+                  "w-16 rounded-full border text-center content-center hover:border-4",
+                  user?.avatar === avatar ? "border-4 border-red-300" : ""
+                )}
+              >
+                <p className="text-3xl">{avatar}</p>
+              </div>
+            </div>
+          ))}
+        </div>
         <label className="form-control w-full">
           <div className="label">
             <span className="label-text">what is your name?</span>

@@ -9,6 +9,7 @@ export const UserContext = createContext({
     bio: "I am a software engineer",
     links: ["github;https://github.com", "", ""],
     slug: "world",
+    avatar: "",
   },
   setUser: (
     value: SetStateAction<{
@@ -17,6 +18,7 @@ export const UserContext = createContext({
       bio: string;
       links: string[];
       slug: string;
+      avatar: string;
     }>
   ) => {},
 });
