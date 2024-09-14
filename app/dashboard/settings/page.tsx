@@ -34,7 +34,7 @@ export default function Home() {
       <form>
         <label className="form-control w-full gap-3">
           <div className="label">
-            <span className="label-text">slug url</span>
+            <span className="label-text">change your url</span>
           </div>
           <input
             value={slug}
