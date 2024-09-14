@@ -3,6 +3,7 @@ import RewriteButton from "@/components/ui/rewrite-button";
 import { useContext } from "react";
 import { UserContext } from "../context/provider";
 import { cn } from "@/utils/cn";
+import { motion } from "framer-motion";
 
 const avatars = ["", "👾", "🤖", "👽", "🚀", "🛸"];
 
@@ -15,7 +16,12 @@ export default function Page() {
         {/* <p className="mt-4 text-gray-600">Welcome to the admin page!</p> */}
         <div className="flex gap-3 justify-between">
           {avatars.map((avatar, index) => (
-            <div
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
               key={index}
               className="avatar hover:cursor-pointer"
               onClick={() => setUser({ ...user, avatar: avatar })}
@@ -26,9 +32,9 @@ export default function Page() {
                   user?.avatar === avatar ? "border-4 border-red-300" : ""
                 )}
               >
-                <p className="text-3xl">{avatar}</p>
+                <p className="text-xl sm:text-3xl">{avatar}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
         <label className="form-control w-full">
