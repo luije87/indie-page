@@ -20,7 +20,6 @@ export default function DeployButton() {
 
     if (error) {
       alert("error deploying");
-      console.log(error);
       return;
     }
 

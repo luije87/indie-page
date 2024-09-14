@@ -14,8 +14,6 @@ export async function POST(request: NextRequest) {
   }
 
   const json = await request.json();
-
-  console.log(json);
   const bio = json.bio;
 
   const openai = new OpenAI({
@@ -38,8 +36,6 @@ export async function POST(request: NextRequest) {
   });
 
   const content = completion.choices[0].message.content;
-
-  console.log(content);
 
   return NextResponse.json({ content });
 }
