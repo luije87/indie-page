@@ -65,7 +65,7 @@ export default function RewriteButton() {
             </button>
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
-              <button className="btn">heck no!</button>
+              <button className="btn">cancel</button>
             </form>
           </div>
         </div>
